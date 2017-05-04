@@ -8,6 +8,7 @@ Provides class WKCompressor as implementation of WK algorithm
 
 import functools
 import math  
+import sys
 
 ZERO = 0
 PARTIAL = 1
@@ -278,3 +279,5 @@ class WKCompressor():
         packed_dict_indices = compressed_page[dict_indices_offset : low_bits_offset]
         return packed_dict_indices
 
+if __name__ == "__main__":
+    pass
