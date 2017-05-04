@@ -8,3 +8,4 @@ unxz < $file > pipe &
 
 python3 cluster_tester.py ${args[@]} 
 
+rm pipe
