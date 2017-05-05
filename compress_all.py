@@ -23,7 +23,7 @@ for word_size_bits in [32,64]:
             for algorithm in ["wk", "wk-huffman"]:
                 results_dir = os.path.join(results_base_dir, algorithm, str(word_size_bits), str(dict_size), str(low_bits))
                 if not os.path.exists(results_dir):
-                    os.makedirs(results_dir, mode = 700)
+                    os.makedirs(results_dir, mode = 755)
                 
                 f.write("log = " + os.path.join(results_dir, "log.txt\n"))
                 f.write("output = " + os.path.join(results_dir, "out.txt\n"))
@@ -32,18 +32,24 @@ for word_size_bits in [32,64]:
                 f.write("queue\n\n")  
                 
 results_lzma = os.path.join(results_base_dir, "lzma")
+if not os.path.exists(results_lzma):
+    os.makedirs(results_lzma, mode = 755)
 f.write("log = " + os.path.join(results_lzma, "log.txt\n"))
 f.write("output = " + os.path.join(results_lzma, "out.txt\n"))
 f.write("error = " + os.path.join(results_lzma, "err.txt\n"))
 f.write("arguments = " + trace + " lzma\n")
 f.write("queue\n\n") 
 
-results_bzip = os.path.join(results_base_dir, "bzip")  
+results_bzip = os.path.join(results_base_dir, "bzip")
+if not os.path.exists(results_bzip):
+    os.makedirs(results_bzip, mode = 755)
 f.write("log = " + os.path.join(results_bzip, "log.txt\n"))
 f.write("output = " + os.path.join(results_bzip, "out.txt\n"))
 f.write("error = " + os.path.join(results_bzip, "err.txt\n"))
 f.write("arguments = " + trace + " bzip\n")
 f.write("queue\n\n") 
+
+f.close()
 
 subprocess.run(["condor_submit",os.path.join(base_dir, cmd_file)])
                 
