@@ -17,18 +17,18 @@ f.write("priority = 5\n")
 f.write("executable = " + script + "\n")
 f.write("\n")
 
-for word_size in [32,64]:
+for word_size_bits in [32,64]:
     for dict_size in [2**n for n in range(1,11)]:
         for low_bits in range(4,17):
             for algorithm in ["wk", "wk-huffman"]:
-                results_dir = os.path.join(results_base_dir, algorithm, str(word_size), str(dict_size), str(low_bits))
+                results_dir = os.path.join(results_base_dir, algorithm, str(word_size_bits), str(dict_size), str(low_bits))
                 if not os.path.exists(results_dir):
                     os.makedirs(results_dir, mode = 700)
                 
                 f.write("log = " + os.path.join(results_dir, "log.txt\n"))
                 f.write("output = " + os.path.join(results_dir, "out.txt\n"))
                 f.write("error = " + os.path.join(results_dir, "err.txt\n"))
-                f.write("arguments = " + trace + " " + algorithm + " " + str(word_size) + " " + str(dict_size) + " " + str(low_bits) +"\n")
+                f.write("arguments = " + trace + " " + algorithm + " " + str(word_size_bits//8) + " " + str(dict_size) + " " + str(low_bits) +"\n")
                 f.write("queue\n\n")  
                 
 results_lzma = os.path.join(results_base_dir, "lzma")

@@ -8,7 +8,6 @@ Provides class WKCompressor as implementation of WK algorithm
 
 import functools
 import math  
-import sys
 
 ZERO = 0
 PARTIAL = 1

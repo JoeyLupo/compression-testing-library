@@ -10,7 +10,7 @@ import bz2
 def page_reader(trace):
     with open(trace, 'rb') as f:
         count = 0
-        while count < 10:   
+        while count < 20:   
             try:
                 page = f.read(4104)
                 page = page[8:]
@@ -43,7 +43,7 @@ def compressor(algorithm, wk_compressor = None):
                 exit()
             compressed_size = len(compressed)
             #compressed_size_bytes = struct.pack(">I", compressed_size)
-            out.write(str(compressed_size) + " ")
+            out.write(str(compressed_size) + "\n")
 
 if __name__ == '__main__':
     q = queue.Queue()
