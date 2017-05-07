@@ -8,7 +8,7 @@ base_dir = os.getcwd()
 results_base_dir = os.path.join(base_dir, "results")
 
 cmd_file = "compress.cmd"
-f = open(cmd_file, 'w')
+f = open(cmd_file, 'w+')
 f.write("universe = vanilla\n")
 f.write("notification = never\n")
 f.write("getenv = true\n")
@@ -51,5 +51,6 @@ f.write("queue\n\n")
 
 f.close()
 
+subprocess.run(["chmod","755", "results", "-R"])
 subprocess.run(["condor_submit",os.path.join(base_dir, cmd_file)])
                 
