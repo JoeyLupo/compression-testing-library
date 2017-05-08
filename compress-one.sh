@@ -3,16 +3,15 @@
 args=($@)
 file=${args[0]}
 params=("${args[@]:1}")
-pipe="pipe"
+pipe="/tmp/pipe"
 for arg in "${params[@]}"
 do
 	pipe+="-$arg"
 done
 
 mkfifo "$pipe"
-args[0]="$pipe"
 unxz < "$file" > "$pipe" &
-
-python3 cluster_tester.py ${args[@]} 
+args[0]="$pipe"
+python3 cluster_tester.py "${args[@]}" 
 
 rm "$pipe"
